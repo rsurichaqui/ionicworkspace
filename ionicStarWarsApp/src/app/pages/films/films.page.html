@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Films</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-content [fullscreen]="true">
+    <ion-searchbar placeholder="Search..." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
+
+  <ion-list>
+    <ion-item button detail lines="inset" *ngFor="let film of (films | async)?.results | filter:filterTerm" (click)="openDetails(film)">
+      {{ film.title }} </ion-item>
+  </ion-list>
+</ion-content>
