@@ -27,58 +27,80 @@
     <ion-checkbox [(ngModel)]="isdni" (ionChange)="updateestadodni()"></ion-checkbox>
   </ion-item>
   <ion-list>
-  <ion-radio-group [(ngModel)]="tipodoc" (ionChange)="updatetopodoc()">
-    <ion-list-header>
-      <ion-label>
-        Tipo documento
-      </ion-label>
-    </ion-list-header>
+    <ion-radio-group [(ngModel)]="tipodoc" (ionChange)="updatetopodoc()">
+      <ion-list-header>
+        <ion-label>
+          Tipo documento
+        </ion-label>
+      </ion-list-header>
 
-    <ion-item>
-      <ion-label>DNI</ion-label>
-      <ion-radio value="dni"></ion-radio>
-    </ion-item>
+      <ion-item>
+        <ion-label>DNI</ion-label>
+        <ion-radio value="dni"></ion-radio>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>RUC</ion-label>
-      <ion-radio value="ruc"></ion-radio>
-    </ion-item>
+      <ion-item>
+        <ion-label>RUC</ion-label>
+        <ion-radio value="ruc"></ion-radio>
+      </ion-item>
 
-    <ion-item>
-      <ion-label>C. E.</ion-label>
-      <ion-radio value="ce"></ion-radio>
-    </ion-item>
-  </ion-radio-group>
-</ion-list>
-<ion-searchbar color="danger" placeholder="Ingrese codigo de planeta" animated="true" (ionInput)="getPlanetData($event.target.value)"></ion-searchbar>
-  <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
-    <ion-item lines="full">
-      <ion-label position="floating">Name</ion-label>
-      <ion-input formControlName="name" type="text" required placeholder="Ingrese dato"></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Rotation period</ion-label>
-      <ion-input formControlName="rotation_period" type="text" required placeholder="Ingrese dato"></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Orbital period</ion-label>
-      <ion-input formControlName="orbital_period" type="text" required placeholder="Ingrese dato"></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Diameter</ion-label>
-      <ion-input formControlName="diameter" type="text" required placeholder="Ingrese dato"></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Climate</ion-label>
-      <ion-input formControlName="climate" type="text" required placeholder="Ingrese dato"></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">Gravity</ion-label>
-      <ion-input formControlName="gravity" type="text" required placeholder="Ingrese dato"></ion-input>
-    </ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
-      </ion-col>
-    </ion-row>
-  </form>
+      <ion-item>
+        <ion-label>C. E.</ion-label>
+        <ion-radio value="ce"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ion-list>
+
+  <ng-container [ngSwitch]="tipodoc">
+    <ng-container *ngSwitchCase="'dni'">
+      <ion-searchbar color="danger" placeholder="Ingrese codigo de planeta" animated="true" type="number"
+        (ionInput)="getPlanetData($event.target.value)"></ion-searchbar>
+    </ng-container>
+    <ng-container *ngSwitchCase="'ruc'">
+      <ion-searchbar color="warning" placeholder="Ingrese codigo de planeta" animated="true" type="number"
+        (ionInput)="getPlanetData($event.target.value)"></ion-searchbar>
+      
+    </ng-container>
+    <ng-container *ngSwitchCase="'ce'">
+      <ion-searchbar color="success" placeholder="Ingrese codigo de planeta" animated="true" type="number"
+        (ionInput)="getPlanetData($event.target.value)"></ion-searchbar>
+      
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <ion-text color="dark">
+        <h5>Por favor seleccione un tipo de documento</h5>
+      </ion-text>
+    </ng-container>
+    <form [formGroup]="ionicForm" (ngSubmit)="submitForm()" novalidate>
+      <ion-item lines="full">
+        <ion-label position="floating">Name</ion-label>
+        <ion-input formControlName="name" type="text" required placeholder="Ingrese dato"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Rotation period</ion-label>
+        <ion-input formControlName="rotation_period" type="text" required placeholder="Ingrese dato"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Orbital period</ion-label>
+        <ion-input formControlName="orbital_period" type="text" required placeholder="Ingrese dato"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Diameter</ion-label>
+        <ion-input formControlName="diameter" type="text" required placeholder="Ingrese dato"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Climate</ion-label>
+        <ion-input formControlName="climate" type="text" required placeholder="Ingrese dato"></ion-input>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label position="floating">Gravity</ion-label>
+        <ion-input formControlName="gravity" type="text" required placeholder="Ingrese dato"></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+  </ng-container>

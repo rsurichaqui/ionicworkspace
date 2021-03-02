@@ -33,16 +33,27 @@ export class PlanetsPage implements OnInit {
     })
   }
   getPlanetData(id) {
-    this.api.getPlanet(id).subscribe(res=>{
-      this.ionicForm.setValue({
-        name:res['name'],
-        rotation_period:res['rotation_period'],
-        orbital_period:res['orbital_period'],
-        diameter:res['diameter'],
-        climate:res['climate'],
-        gravity:res['gravity']
-      })
-    },error => console.log(error))
+    this.api.getPlanet(id).subscribe(res => {
+      if (res['name'] != null) {
+        this.ionicForm.setValue({
+          name: res['name'],
+          rotation_period: res['rotation_period'],
+          orbital_period: res['orbital_period'],
+          diameter: res['diameter'],
+          climate: res['climate'],
+          gravity: res['gravity']
+        })
+      }else{
+        this.ionicForm.setValue({
+          name: '',
+          rotation_period: '',
+          orbital_period: '',
+          diameter: '',
+          climate: '',
+          gravity: ''
+        })
+      }
+    })
   }
   updateestadodni(){
     console.log('Nuevo valor ' + this.isdni)
